@@ -3,14 +3,17 @@ package mcm.edu.ph.turn_based_game;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.Random;
 
-public class GameScreen extends AppCompatActivity implements View.OnClickListener{
+public class GameScreen extends Activity implements View.OnClickListener{
 
 
     int P1HP = 100;
@@ -21,12 +24,17 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
     int P2maxDamage = 10;
     int turnNumbers = 1;
 
+    MediaPlayer clickSound;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         Button nextTurn = findViewById(R.id.btnNextTurn);
+
+        clickSound = MediaPlayer.create(GameScreen.this, R.raw.click);
 
         TextView txtP1HP, txtP2HP, txtP1DPT, txtP2DPT;
         txtP1HP = findViewById(R.id.txtP1HP);
@@ -103,4 +111,11 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
 
 
     }
+
+    public void soundPlay(View v){
+
+        clickSound.start();
+
+    }
+
 }
